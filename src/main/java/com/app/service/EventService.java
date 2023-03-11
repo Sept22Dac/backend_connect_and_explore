@@ -1,9 +1,12 @@
 package com.app.service;
 
-import com.app.entities.Event;
+import com.app.dto.SportsDto;
+import com.app.entities.Sports;
 
 public interface EventService {
 	
-	void addEvent(Event e);
+	Sports addSportEvent(Long id,SportsDto sportdto);
+	
+	
 
 }

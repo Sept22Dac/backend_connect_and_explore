@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exceptions.UserAlreadyExistsException;
+import com.app.custom_exceptions.UserNotFoundException;
 import com.app.entities.Role;
 import com.app.entities.User;
 import com.app.repository.UserRepository;
@@ -30,6 +31,12 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(enc.encode(user.getPassword()));
 		
 		return userRepo.save(user);
+	}
+
+	@Override
+	public User getUserById(Long id) {
+		
+		return userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User with id " + id + "does not exist"));
 	}
 	
 	

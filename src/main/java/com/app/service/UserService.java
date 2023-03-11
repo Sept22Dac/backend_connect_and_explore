@@ -6,5 +6,7 @@ public interface UserService {
 	
 	User addUserDetails(User user);
 	
+	User getUserById(Long id);
+	
 
 }
