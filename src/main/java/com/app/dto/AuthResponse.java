@@ -16,6 +16,8 @@ import lombok.ToString;
 @AllArgsConstructor
 public class AuthResponse {
 	
+	private Long user_id;
+	
 	private String fname;
 	
 	private String lname;

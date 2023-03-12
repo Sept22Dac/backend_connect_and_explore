@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,9 +25,11 @@ import com.app.service.SportsService;
 import com.app.service.TravelService;
 import com.app.service.UserEventService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/event")
-
+@Slf4j
 public class EventController {
 	
 	@Autowired
@@ -71,13 +75,14 @@ public class EventController {
 	
 	@GetMapping("/sports/{stype}")
 	public ResponseEntity<?> getParticularSports(@PathVariable SportsType stype){
+		
 		return new ResponseEntity<>(sportService.findAllParticularSports(stype),HttpStatus.OK);
 	}
 	
 	
 	@PostMapping("/add/concert")
-	public ResponseEntity<?> addConcertEvent(@RequestParam Long id, @RequestBody Concert concert){
-		
+	public ResponseEntity<?> addConcertEvent(@RequestParam Long id, @RequestBody Concert concert,HttpServletRequest request){
+		log.info(request.getRequestURI());
 		return new ResponseEntity<>(eventService.addConcertEvent(id,concert), HttpStatus.CREATED);
 	}
 	
