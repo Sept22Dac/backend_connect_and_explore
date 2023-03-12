@@ -2,6 +2,7 @@ package com.app.service;
 
 import com.app.dto.SportsDto;
 import com.app.entities.Concert;
+import com.app.entities.Event;
 import com.app.entities.Sports;
 import com.app.entities.Travel;
 
@@ -12,6 +13,10 @@ public interface EventService {
 	Travel addTravelEvent(Long id, Travel travel);
 
 	Concert addConcertEvent(Long id, Concert concert);
+
+	String joinUserEvent(Long user_id, Long event_id);
+	
+	Event getEventById(Long id);
 	
 
 }

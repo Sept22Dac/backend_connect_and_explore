@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ import com.app.service.ConcertService;
 import com.app.service.EventService;
 import com.app.service.SportsService;
 import com.app.service.TravelService;
+import com.app.service.UserEventService;
 
 @RestController
 @RequestMapping("/event")
@@ -37,6 +39,9 @@ public class EventController {
 	
 	@Autowired
 	private ConcertService concertService;
+	
+	@Autowired
+	private UserEventService userEventService;
 	
 	@Autowired
 	private ModelMapper mapper;
@@ -79,6 +84,11 @@ public class EventController {
 	@GetMapping("/concerts")
 	public ResponseEntity<?> getAllConcerts(){
 		return new ResponseEntity<>(concertService.findAllConcerts(), HttpStatus.OK);
+	}
+	
+	@PutMapping("/joinEvent")
+	public ResponseEntity<?> joinEvent(@RequestParam Long user_id, @RequestParam Long event_id ){
+		return new ResponseEntity<>(eventService.joinUserEvent(user_id,event_id),HttpStatus.OK);
 	}
 	
 	

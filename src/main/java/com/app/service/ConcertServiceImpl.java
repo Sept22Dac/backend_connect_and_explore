@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.custom_exceptions.AlreadyFullException;
 import com.app.custom_exceptions.EventNotFoundException;
 import com.app.entities.Concert;
+import com.app.entities.Sports;
 import com.app.repository.ConcertRepository;
 
 @Service
@@ -24,6 +26,17 @@ public class ConcertServiceImpl implements ConcertService {
 	@Override
 	public List<Concert> findAllConcerts() {
 		return concertRepo.findAll();
+	}
+	@Override
+	public String updateJoined(Long event_id) {
+		Concert concert= getConcertById(event_id);
+		if(concert.getJoined()< concert.getRequired()) {
+			concertRepo.increaseJoinedByOne(event_id);
+			return "Joined Event";
+		}else {
+			throw new AlreadyFullException("Concert Full");
+		}
+		
 	}
 
 }

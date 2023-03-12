@@ -9,4 +9,6 @@ public interface ConcertService {
 	Concert getConcertById(Long id);
 
 	List<Concert> findAllConcerts();
+
+	String updateJoined(Long event_id);
 }

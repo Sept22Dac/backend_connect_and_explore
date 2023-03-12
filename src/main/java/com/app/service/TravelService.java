@@ -8,4 +8,6 @@ public interface TravelService {
 	Travel getTravelById(Long id);
 	
 	List<Travel> findAllTravels();
+
+	String updateJoined(Long event_id);
 }

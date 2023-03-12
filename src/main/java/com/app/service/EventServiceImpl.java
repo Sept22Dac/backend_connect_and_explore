@@ -2,10 +2,14 @@ package com.app.service;
 
 import java.time.LocalDateTime;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import com.app.custom_exceptions.EventNotFoundException;
 import com.app.dto.SportsDto;
 import com.app.entities.Concert;
 import com.app.entities.Event;
@@ -43,7 +47,7 @@ public class EventServiceImpl implements EventService{
 	public Sports addSportEvent(Long id, SportsDto sportdto) {
 		Event e = new Event();
 		e.setEventType(Type.SPORTS);
-		Sports sport = new Sports(e.getEventId(),e,sportdto.getStype(),sportdto.getName(),sportdto.getLocation(),sportdto.getDate(),sportdto.getJoined(),sportdto.getRequired());
+		Sports sport = new Sports(e.getEventId(),e,sportdto.getStype(),sportdto.getName(),sportdto.getLocation(),sportdto.getDate(),sportdto.getRequired(),sportdto.getJoined());
 		e.addSports(sport);
 		Event savedEvent =  eventRepo.save(e);
 		User user = userService.getUserById(id);
@@ -85,6 +89,41 @@ public class EventServiceImpl implements EventService{
 		userEventService.addUserEvent(userEvent);
 		
 		return concertService.getConcertById(savedEvent.getEventId());
+	}
+
+	@Override
+	public String joinUserEvent(Long user_id, Long event_id) {
+		String msg = "Not able to join";
+		
+		User user = userService.getUserById(user_id);
+		Event event = getEventById(event_id);
+	
+
+		
+		if(event.getEventType().equals(Type.SPORTS)) {
+			
+				msg = sportsService.updateJoined(event_id);
+	
+		}else if(event.getEventType().equals(Type.CONCERT)) {
+			
+			 msg = concertService.updateJoined(event_id);
+				
+		}else {
+			msg = travelService.updateJoined(event_id);
+		}
+		
+		UserEventId userEventId = new UserEventId(user_id,event_id);
+		UserEvent userEvent = new UserEvent(userEventId,user,event,null,LocalDateTime.now());
+		userEventService.addUserEvent(userEvent);
+		
+		
+		return msg;
+	}
+
+	@Override
+	public Event getEventById(Long id) {
+		
+		return eventRepo.findById(id).orElseThrow(()-> new EventNotFoundException("Event not found"));
 	}
 
 

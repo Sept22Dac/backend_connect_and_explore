@@ -3,6 +3,7 @@ package com.app.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.app.entities.Sports;
@@ -19,6 +20,12 @@ public interface SportsRepository extends JpaRepository<Sports, Long> {
 	
 	//List<Sports> findBySType(SportsType sType);
 	List<Sports> findByStype(SportsType stype);
+	
+	
+
+	@Modifying
+	@Query("update Sports s set s.joined = s.joined +1 where s.id = ?1")
+	void increaseJoinedByOne(Long event_id);
 	
 
 }

@@ -9,4 +9,6 @@ public interface UserEventService {
 	
 	UserEvent addUserEvent(UserEvent userEvent);
 
+//	String joinUserEvent(Long user_id, Long event_id);
+
 }

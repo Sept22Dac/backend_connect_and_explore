@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.custom_exceptions.AlreadyFullException;
 import com.app.custom_exceptions.EventNotFoundException;
 import com.app.entities.Travel;
 import com.app.repository.TravelRepository;
@@ -26,6 +27,19 @@ public class TravelServiceImpl implements TravelService {
 	@Override
 	public List<Travel> findAllTravels() {
 		return travelRepo.findAll();
+	}
+
+	@Override
+	public String updateJoined(Long event_id) {
+		Travel travel= getTravelById(event_id);
+		if(travel.getJoined()< travel.getRequired()) {
+			travelRepo.increaseJoinedByOne(event_id);
+			return "Joined Event";
+		}else {
+			throw new AlreadyFullException("Concert Full");
+		}
+
+		
 	}
 
 }

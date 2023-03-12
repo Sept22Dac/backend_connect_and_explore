@@ -49,6 +49,7 @@ public class WebSecurityConfig {
 		.antMatchers(HttpMethod.GET,"/event/**").permitAll()
 		.antMatchers(HttpMethod.GET,"/user").hasRole("ADMIN").
 		antMatchers(HttpMethod.POST,"/event/**").permitAll().
+		antMatchers(HttpMethod.PUT,"/event/**").permitAll().
 		
 		
 		anyRequest().authenticated()

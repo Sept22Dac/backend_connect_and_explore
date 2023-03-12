@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.custom_exceptions.AlreadyFullException;
 import com.app.custom_exceptions.EventNotFoundException;
 import com.app.entities.Sports;
 import com.app.entities.SportsType;
@@ -36,6 +37,19 @@ public class SportsServiceImpl implements SportsService {
 	public List<Sports> findAllParticularSports(SportsType stype) {
 
 		return sportsRepo.findByStype(stype);
+	}
+
+	@Override
+	public String updateJoined(Long event_id) {
+
+		Sports sport = getSportById(event_id);
+		if(sport.getJoined()< sport.getRequired()) {
+			sportsRepo.increaseJoinedByOne(event_id);
+			return "Joined Event";
+		}else {
+			throw new AlreadyFullException("Sports full");
+		}
+		
 	}
 
 }

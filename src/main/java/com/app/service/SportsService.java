@@ -16,4 +16,6 @@ public interface SportsService {
 
 	List<Sports> findAllParticularSports(SportsType stype);
 
+	String updateJoined(Long event_id);
+
 }
