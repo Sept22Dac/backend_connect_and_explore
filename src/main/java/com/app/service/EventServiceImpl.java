@@ -1,8 +1,7 @@
 package com.app.service;
 
 import java.time.LocalDateTime;
-
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -125,6 +124,42 @@ public class EventServiceImpl implements EventService{
 		
 		return eventRepo.findById(id).orElseThrow(()-> new EventNotFoundException("Event not found"));
 	}
+
+	@Override
+	public List<Sports> findJoinedSportsEvents(Long id) {
+		
+		return userEventService.findJoinedSportsEvent(id);
+	}
+
+	@Override
+	public List<Travel> findJoinedTravelEvents(Long id) {
+		// TODO Auto-generated method stub
+		return userEventService.findJoinedTravelEvent(id);
+	}
+
+	@Override
+	public List<Concert> findJoinedConcertEvents(Long id) {
+		// TODO Auto-generated method stub
+		return userEventService.findJoinedConcertEvent(id);
+	}
+
+//	@Override
+//	public List<Sports> findCreatedSportsEvents(Long id) {
+//		// TODO Auto-generated method stub
+//		return userEventService.findCreatedSportsEvent(id);
+//	}
+//
+//	@Override
+//	public List<Travel> findCreatedTravelEvents(Long id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public List<Concert> findCreatedConcertEvents(Long id) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 }

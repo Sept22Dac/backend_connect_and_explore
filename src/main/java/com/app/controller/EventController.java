@@ -96,6 +96,33 @@ public class EventController {
 		return new ResponseEntity<>(eventService.joinUserEvent(user_id,event_id),HttpStatus.OK);
 	}
 	
+	@GetMapping("/sportsevents/{id}")
+	public ResponseEntity<?> getJoinedSports(@PathVariable Long id){
+		return new ResponseEntity<>(userEventService.findJoinedSportsEvent(id),HttpStatus.OK);
+	}
+	@GetMapping("/travelevents/{id}")
+	public ResponseEntity<?> getJoinedTravels(@PathVariable Long id){
+		return new ResponseEntity<>(userEventService.findJoinedTravelEvent(id),HttpStatus.OK);
+	}
+	@GetMapping("/concertevents/{id}")
+	public ResponseEntity<?> getJoinedConcerts(@PathVariable Long id){
+		return new ResponseEntity<>(userEventService.findJoinedConcertEvent(id),HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/mysportsevents/{id}")
+	public ResponseEntity<?> getMySports(@PathVariable Long id){
+		return new ResponseEntity<>(userEventService.findCreatedSportsEvent(id),HttpStatus.OK);
+	}
+	@GetMapping("/mytravelevents/{id}")
+	public ResponseEntity<?> getMyTravels(@PathVariable Long id){
+		return new ResponseEntity<>(userEventService.findCreatedTravelEvent(id),HttpStatus.OK);
+	}
+	@GetMapping("/myconcertevents/{id}")
+	public ResponseEntity<?> getMyConcerts(@PathVariable Long id){
+		return new ResponseEntity<>(userEventService.findCreatedConcertEvent(id),HttpStatus.OK);
+	}
+	
 	
 	
 	

@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.util.List;
+
 import com.app.dto.SportsDto;
 import com.app.entities.Concert;
 import com.app.entities.Event;
@@ -17,6 +19,20 @@ public interface EventService {
 	String joinUserEvent(Long user_id, Long event_id);
 	
 	Event getEventById(Long id);
+
+	
+
+	List<Sports> findJoinedSportsEvents(Long id);
+
+	List<Travel> findJoinedTravelEvents(Long id);
+
+	List<Concert> findJoinedConcertEvents(Long id);
+
+//	List<Sports> findCreatedSportsEvents(Long id);
+//	List<Travel> findCreatedTravelEvents(Long id);
+//	List<Concert> findCreatedConcertEvents(Long id);
+	
+	
 	
 
 }
