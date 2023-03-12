@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,7 +44,7 @@ public class Event {
 	private List<UserEvent> users = new ArrayList<>();
 	
 	@OneToOne(mappedBy = "sportEvent",cascade = CascadeType.ALL,
-			orphanRemoval = true )
+			orphanRemoval = true , fetch = FetchType.EAGER)
 	private Sports sportEvent;
 	
 	@OneToOne(mappedBy = "travelEvent"
@@ -61,6 +62,10 @@ public class Event {
 		sportEvent = s;
 		s.setSportEvent(this);
 		
+	}
+	
+	public void addUsers(UserEvent user_event) {
+		users.add(user_event);
 	}
 	@Override
 	public int hashCode() {

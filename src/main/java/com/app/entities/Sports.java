@@ -1,11 +1,13 @@
 package com.app.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
@@ -13,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,10 +40,15 @@ public class Sports implements Serializable{
 	private Long id;
 	
 	
-	@OneToOne
+	@JsonIgnore
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "event_id")
 	@MapsId
 	private Event sportEvent;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private SportsType stype;
 	
 	@NotBlank
 	private String name;
@@ -48,10 +57,12 @@ public class Sports implements Serializable{
 	private String location;
 	
 	@NotNull
-	private LocalDate date;
+	private LocalDateTime date;
 	
-	@NotNull
-	private LocalTime time;
+//	@NotNull
+//	@DateTimeFormat(pattern = "HH:mm", iso = ISO.TIME)
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+//	private LocalTime time;
 	
 	@NotNull
 	private Long required;

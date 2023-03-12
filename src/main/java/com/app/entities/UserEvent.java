@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -28,12 +29,12 @@ public class UserEvent {
 	@EmbeddedId
 	private UserEventId id;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("user_id")
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@MapsId("event_id")
 	@JoinColumn(name = "event_id")
 	private Event event;

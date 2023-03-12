@@ -1,7 +1,6 @@
 package com.app.entities;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ class TestAddEvent {
 	private Long joined;
 		 */
 		
-		SportsDto sport = new SportsDto("Football","pune",LocalDate.parse("2023-04-01"),LocalTime.parse("10:30"),100L,50L);
+		SportsDto sport = new SportsDto("badminton",SportsType.valueOf("BADMINTON"),"sarangarh",LocalDateTime.parse("2023-04-20T07:30"),10L,5L);
 		
 		eventService.addSportEvent( 2L,sport );
 	}
