@@ -12,4 +12,8 @@ public interface TravelService {
 	String updateJoined(Long event_id);
 
 	void deleteTravelById(Long id);
+
+	void increaseJoined(Long eventId);
+
+	void decreaseJoined(Long eventId);
 }

@@ -10,6 +10,7 @@ import com.app.entities.Concert;
 import com.app.entities.Event;
 import com.app.entities.Sports;
 import com.app.entities.Travel;
+import com.app.entities.User;
 import com.app.entities.UserEvent;
 
 
@@ -39,4 +40,8 @@ public interface UserEventRepository extends JpaRepository<UserEvent, Long> {
 	@Modifying
 	@Query("delete from UserEvent ue where ue.event=?1")
 	void deleteByEvent(Event event);
+
+	@Modifying
+	@Query("delete from UserEvent ue where ue.user = ?1 and ue.event = ?2")
+	void deleteByUserEvent(User user, Event event);
 }

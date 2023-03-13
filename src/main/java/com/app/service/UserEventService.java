@@ -29,6 +29,8 @@ public interface UserEventService {
 
 	void deleteAllByEvent(Event event);
 
+	String optOutFromEvent(Long user_id, Long event_id);
+
 //	String joinUserEvent(Long user_id, Long event_id);
 
 }

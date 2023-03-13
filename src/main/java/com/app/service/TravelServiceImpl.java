@@ -48,4 +48,16 @@ public class TravelServiceImpl implements TravelService {
 		travelRepo.deleteById(id);
 	}
 
+	@Override
+	public void increaseJoined(Long eventId) {
+		travelRepo.increaseJoinedByOne(eventId);
+		
+	}
+
+	@Override
+	public void decreaseJoined(Long eventId) {
+		travelRepo.decreaseJoinedByOne(eventId);
+		
+	}
+
 }

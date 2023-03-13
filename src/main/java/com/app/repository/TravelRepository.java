@@ -12,4 +12,8 @@ public interface TravelRepository extends JpaRepository<Travel, Long>{
 	@Query("update Travel t set t.joined = t.joined+1 where t.id = ?1")
 	void increaseJoinedByOne(Long event_id);
 
+	@Modifying
+	@Query("update Travel t set t.joined = t.joined-1 where t.id = ?1")
+	void decreaseJoinedByOne(Long eventId);
+
 }

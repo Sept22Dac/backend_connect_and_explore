@@ -10,6 +10,7 @@ import com.app.entities.Concert;
 import com.app.entities.Event;
 import com.app.entities.Sports;
 import com.app.entities.Travel;
+import com.app.entities.User;
 import com.app.entities.UserEvent;
 import com.app.repository.UserEventRepository;
 
@@ -21,6 +22,12 @@ public class UserEventServiceImpl implements UserEventService {
 	@Autowired
 	private UserEventRepository userEventRepo;
 	
+	@Autowired
+	private EventService eventService;
+	
+	
+	@Autowired
+	private UserService userService;
 //	@Autowired
 //	private EventService eventService;
 
@@ -77,6 +84,15 @@ public class UserEventServiceImpl implements UserEventService {
 	public void deleteAllByEvent(Event event) {
 		userEventRepo.deleteByEvent(event);
 		
+	}
+
+	@Override
+	public String optOutFromEvent(Long user_id, Long event_id) {
+		User user = userService.getUserById(user_id);
+		Event event = eventService.getEventById(event_id);
+		userEventRepo.deleteByUserEvent(user,event);
+		eventService.decreaseJoined(event.getEventId());
+		return null;
 	}
 
 

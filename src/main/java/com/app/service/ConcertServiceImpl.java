@@ -43,5 +43,15 @@ public class ConcertServiceImpl implements ConcertService {
 		concertRepo.deleteById(id);
 		
 	}
+	@Override
+	public void increaseJoined(Long eventId) {
+		concertRepo.increaseJoinedByOne(eventId);
+		
+	}
+	@Override
+	public void decreaseJoined(Long eventId) {
+		concertRepo.decreaseJoinedByOne(eventId);
+		
+	}
 
 }

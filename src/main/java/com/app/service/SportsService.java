@@ -20,4 +20,8 @@ public interface SportsService {
 
 	void deleteSportsById(Long id);
 
+	void increaseJoined(Long eventId);
+
+	void decreaseJoined(Long eventId);
+
 }

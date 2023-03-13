@@ -19,6 +19,7 @@ import com.app.entities.User;
 import com.app.entities.UserEvent;
 import com.app.entities.UserEventId;
 import com.app.repository.EventDao;
+import com.app.repository.SportsRepository;
 
 
 @Service
@@ -42,6 +43,10 @@ public class EventServiceImpl implements EventService{
 	
 	@Autowired
 	private ConcertService concertService;
+	
+	
+	
+	
 	
 	public Sports addSportEvent(Long id, SportsDto sportdto) {
 		Event e = new Event();
@@ -155,6 +160,24 @@ public class EventServiceImpl implements EventService{
 		}
 		
 		 return "event deleted";
+	}
+
+	@Override
+	public String decreaseJoined(Long eventId) {
+		Event event = getEventById(eventId);
+		if(event.getEventType().equals(Type.SPORTS)) {
+			Sports sport = sportsService.getSportById(eventId);
+			sportsService.decreaseJoined(eventId);
+			
+		}else if(event.getEventType().equals(Type.CONCERT)){
+			Concert concert = concertService.getConcertById(eventId);
+			concertService.decreaseJoined(eventId);
+		}else {
+			Travel travel = travelService.getTravelById(eventId);
+			travelService.decreaseJoined(eventId);
+		}
+		//eventRepo.decreaseJoinedByOne(eventId)
+		return "decreased Joined by One";
 	}
 
 

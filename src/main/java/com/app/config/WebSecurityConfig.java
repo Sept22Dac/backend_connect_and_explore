@@ -47,11 +47,12 @@ public class WebSecurityConfig {
 		.antMatchers("/auth/**", "/swagger*/**", "/v*/api-docs/**").permitAll()
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
 		.antMatchers(HttpMethod.GET,"/event/**").permitAll()
-		.antMatchers(HttpMethod.GET,"/user/**").permitAll()
-		.antMatchers(HttpMethod.DELETE,"/user/**").permitAll().
-		antMatchers(HttpMethod.POST,"/event/**").permitAll().
-		antMatchers(HttpMethod.PUT,"/event/**").permitAll().
-		antMatchers(HttpMethod.DELETE,"/event/delete/**").permitAll().
+		.antMatchers(HttpMethod.GET,"/user/**").hasRole("ADMIN")
+		.antMatchers(HttpMethod.DELETE,"/user/**").hasRole("ADMIN").
+		antMatchers(HttpMethod.POST,"/event/**").hasAnyRole("USER","ADMIN").
+		antMatchers(HttpMethod.DELETE,"/event/**").hasAnyRole("USER","ADMIN").
+		antMatchers(HttpMethod.PUT,"/event/**").hasAnyRole("USER","ADMIN").
+		antMatchers(HttpMethod.DELETE,"/event/delete/**").hasAnyRole("USER","ADMIN").
 		
 		
 		anyRequest().authenticated()

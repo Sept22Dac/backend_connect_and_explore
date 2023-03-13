@@ -26,6 +26,12 @@ public interface SportsRepository extends JpaRepository<Sports, Long> {
 	@Modifying
 	@Query("update Sports s set s.joined = s.joined +1 where s.id = ?1")
 	void increaseJoinedByOne(Long event_id);
+
+
+	
+	@Modifying
+	@Query("update Sports s set s.joined = s.joined -1 where s.id = ?1")
+	void decreaseJoinedByOne(Long eventId);
 	
 
 }

@@ -13,4 +13,8 @@ public interface ConcertService {
 	String updateJoined(Long event_id);
 
 	void deleteConcertsById(Long id);
+
+	void increaseJoined(Long eventId);
+
+	void decreaseJoined(Long eventId);
 }

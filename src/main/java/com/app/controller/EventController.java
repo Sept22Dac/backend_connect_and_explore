@@ -129,6 +129,11 @@ public class EventController {
 		return new ResponseEntity<>(eventService.deleteEvent(id),HttpStatus.OK);
 	}
 	
+	@DeleteMapping("/optOut")
+	public ResponseEntity<?> optOut(@RequestParam Long user_id, @RequestParam Long event_id){
+		return new ResponseEntity<>(userEventService.optOutFromEvent(user_id,event_id),HttpStatus.OK);
+	}
+	
 	
 	
 	

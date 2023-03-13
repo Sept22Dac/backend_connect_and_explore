@@ -22,6 +22,8 @@ public interface EventService {
 
 	String deleteEvent(Long id);
 
+	String decreaseJoined(Long eventId);
+
 	
 
 

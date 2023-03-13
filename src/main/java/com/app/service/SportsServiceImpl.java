@@ -58,4 +58,16 @@ public class SportsServiceImpl implements SportsService {
 		
 	}
 
+	@Override
+	public void increaseJoined(Long eventId) {
+		sportsRepo.increaseJoinedByOne(eventId);
+		
+	}
+
+	@Override
+	public void decreaseJoined(Long eventId) {
+		sportsRepo.decreaseJoinedByOne(eventId);
+		
+	}
+
 }

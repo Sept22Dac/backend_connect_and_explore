@@ -12,4 +12,8 @@ public interface ConcertRepository extends JpaRepository<Concert, Long> {
 	@Query("update Concert c set c.joined = c.joined+1 where c.id=?1")
 	void increaseJoinedByOne(Long event_id);
 
+	@Modifying
+	@Query("update Concert c set c.joined = c.joined-1 where c.id=?1")
+	void decreaseJoinedByOne(Long eventId);
+
 }
