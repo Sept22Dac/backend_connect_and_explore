@@ -20,17 +20,11 @@ public interface EventService {
 	
 	Event getEventById(Long id);
 
+	String deleteEvent(Long id);
+
 	
 
-	List<Sports> findJoinedSportsEvents(Long id);
 
-	List<Travel> findJoinedTravelEvents(Long id);
-
-	List<Concert> findJoinedConcertEvents(Long id);
-
-//	List<Sports> findCreatedSportsEvents(Long id);
-//	List<Travel> findCreatedTravelEvents(Long id);
-//	List<Concert> findCreatedConcertEvents(Long id);
 	
 	
 	

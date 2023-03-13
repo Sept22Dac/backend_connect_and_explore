@@ -18,4 +18,6 @@ public interface SportsService {
 
 	String updateJoined(Long event_id);
 
+	void deleteSportsById(Long id);
+
 }

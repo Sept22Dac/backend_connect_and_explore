@@ -81,6 +81,7 @@ public class User {
 	
 	private String contact;
 	
+	@JsonIgnore
 	@OneToMany( mappedBy = "user",
 			cascade = CascadeType.ALL,
 			orphanRemoval = true,fetch = FetchType.EAGER)

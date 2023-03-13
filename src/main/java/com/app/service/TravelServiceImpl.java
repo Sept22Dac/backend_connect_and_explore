@@ -42,4 +42,10 @@ public class TravelServiceImpl implements TravelService {
 		
 	}
 
+	@Override
+	public void deleteTravelById(Long id) {
+
+		travelRepo.deleteById(id);
+	}
+
 }

@@ -64,6 +64,18 @@ public class Event {
 		
 	}
 	
+	public void deleteSports(Sports s) {
+		s.setSportEvent(null);
+		this.sportEvent = null;
+	}
+	
+	public void deleteUserEvents(List<UserEvent> userEventList) {
+		this.users.removeAll(userEventList);
+		userEventList.forEach((userEvent)->{
+			userEvent.setEvent(null);
+		});
+	}
+	
 	public void addUsers(UserEvent user_event) {
 		users.add(user_event);
 	}

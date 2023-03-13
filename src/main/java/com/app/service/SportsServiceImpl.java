@@ -52,4 +52,10 @@ public class SportsServiceImpl implements SportsService {
 		
 	}
 
+	@Override
+	public void deleteSportsById(Long id) {
+		sportsRepo.deleteById(id);
+		
+	}
+
 }

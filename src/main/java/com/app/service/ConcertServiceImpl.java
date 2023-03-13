@@ -38,5 +38,10 @@ public class ConcertServiceImpl implements ConcertService {
 		}
 		
 	}
+	@Override
+	public void deleteConcertsById(Long id) {
+		concertRepo.deleteById(id);
+		
+	}
 
 }

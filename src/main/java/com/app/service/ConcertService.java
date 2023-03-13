@@ -11,4 +11,6 @@ public interface ConcertService {
 	List<Concert> findAllConcerts();
 
 	String updateJoined(Long event_id);
+
+	void deleteConcertsById(Long id);
 }

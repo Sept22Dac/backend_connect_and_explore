@@ -126,40 +126,36 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public List<Sports> findJoinedSportsEvents(Long id) {
+	public String deleteEvent(Long id) {
+
+		if(eventRepo.existsById(id)) {
+			Event event = getEventById(id);
+//			if(event.getEventType().equals(Type.SPORTS)) {
+//				event.deleteSports(sportsService.getSportById(id));
+//				event.deleteUserEvents(userEventService.getUserEvents(event));
+//				eventRepo.deleteById(id);
+//			}
+			if(event.getEventType().equals(Type.SPORTS)) {
+			sportsService.deleteSportsById(id);
+			userEventService.deleteAllByEvent(event);
+			eventRepo.deleteById(id);
+			}else if(event.getEventType().equals(Type.CONCERT)) {
+				concertService.deleteConcertsById(id);
+				userEventService.deleteAllByEvent(event);
+				eventRepo.deleteById(id);
+			}else {
+				travelService.deleteTravelById(id);
+				userEventService.deleteAllByEvent(event);
+				eventRepo.deleteById(id);
+			}
+			
+
+		}else {
+			throw new EventNotFoundException("there is no event with id " + id);
+		}
 		
-		return userEventService.findJoinedSportsEvent(id);
+		 return "event deleted";
 	}
-
-	@Override
-	public List<Travel> findJoinedTravelEvents(Long id) {
-		// TODO Auto-generated method stub
-		return userEventService.findJoinedTravelEvent(id);
-	}
-
-	@Override
-	public List<Concert> findJoinedConcertEvents(Long id) {
-		// TODO Auto-generated method stub
-		return userEventService.findJoinedConcertEvent(id);
-	}
-
-//	@Override
-//	public List<Sports> findCreatedSportsEvents(Long id) {
-//		// TODO Auto-generated method stub
-//		return userEventService.findCreatedSportsEvent(id);
-//	}
-//
-//	@Override
-//	public List<Travel> findCreatedTravelEvents(Long id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public List<Concert> findCreatedConcertEvents(Long id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 
 }

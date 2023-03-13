@@ -10,4 +10,6 @@ public interface TravelService {
 	List<Travel> findAllTravels();
 
 	String updateJoined(Long event_id);
+
+	void deleteTravelById(Long id);
 }
