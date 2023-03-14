@@ -2,6 +2,7 @@ package com.app.filters;
 
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -35,7 +36,14 @@ public class JWTRequestFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 		
 		log.info("in once per request filter");
-		String header = request.getHeader("Authorization");
+		String header1 = request.getRequestURI();
+		Enumeration<String> reqBody = request.getHeaderNames();
+		while (reqBody.hasMoreElements()) {
+		    String param = reqBody.nextElement();
+		    log.info(param);
+		}
+		String header = request.getHeader("authorization");
+		log.info(header);
 		if (header != null && header.startsWith("Bearer ")) {
 			// Bearer token present --> extract n validate it
 			String token = header.substring(7);
